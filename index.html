@@ -862,7 +862,7 @@
       <span class="eyebrow">Passez commande</span>
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.5vw,3rem);font-weight:300;color:var(--dark);">Envoyez-nous <em style="color:var(--gold-dark);font-style:italic;">votre demande</em></h2>
     </div>
-    <form onsubmit="envoyerCommande(event)" style="display:flex;flex-direction:column;gap:1.2rem;">
+    <form onsubmit="envoyerMail(event)" style="display:flex;flex-direction:column;gap:1.2rem;">
       <input type="text" id="fc-nom" placeholder="Votre nom *" required style="padding:1rem 1.2rem;border:1px solid rgba(201,168,76,0.3);background:white;font-family:'Lato',sans-serif;font-size:0.9rem;color:var(--text);outline:none;border-radius:8px;" />
       <input type="text" id="fc-adresse" placeholder="Votre adresse" style="padding:1rem 1.2rem;border:1px solid rgba(201,168,76,0.3);background:white;font-family:'Lato',sans-serif;font-size:0.9rem;color:var(--text);outline:none;border-radius:8px;" />
       <input type="tel" id="fc-tel" placeholder="Votre téléphone *" required style="padding:1rem 1.2rem;border:1px solid rgba(201,168,76,0.3);background:white;font-family:'Lato',sans-serif;font-size:0.9rem;color:var(--text);outline:none;border-radius:8px;" />
@@ -929,14 +929,14 @@
   }
   document.getElementById('nav-overlay').addEventListener('click', closeMenu);
 
-  function envoyerCommande(e) {
+  function envoyerMail(e) {
     e.preventDefault();
     const nom = document.getElementById('fc-nom').value;
     const tel = document.getElementById('fc-tel').value;
     const adresse = document.getElementById('fc-adresse').value;
     const message = document.getElementById('fc-message').value;
-    const msg = encodeURIComponent(`Nouvelle commande de ${nom}\nTél : ${tel}\nAdresse : ${adresse}\nMessage : ${message}`);
-    window.open(`https://wa.me/33626449653?text=${msg}`, '_blank');
+    const corps = `Nom : ${nom}%0ATél : ${tel}%0AAdresse : ${adresse}%0AMessage : ${message}`;
+    window.location.href = `mailto:traiteur.samira@gmail.com?subject=Nouvelle commande - Traiteur Samira&body=${corps}`;
     document.getElementById('fc-confirm').style.display = 'block';
     e.target.reset();
   }
