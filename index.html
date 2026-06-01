@@ -307,8 +307,7 @@
     .social-btn { display: inline-block; padding: 0.8rem 2rem; border: 1px solid var(--gold); color: var(--brown); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
     .social-btn:hover { background: var(--gold); color: white; }
 
-
-    /* ═══ RÉALISATIONS — CARROUSEL ═══ */
+    /* ═══ RÉALISATIONS — CARROUSEL MANUEL ═══ */
     .realisations-section {
       background: var(--ivory);
       padding: 5rem 0;
@@ -334,41 +333,31 @@
       color: var(--gold-dark);
       font-style: italic;
     }
-    .realisations-marquee {
+    .realisations-wrapper {
       position: relative;
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 0 64px;
+    }
+    .realisations-marquee {
       width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
       scroll-behavior: smooth;
       scrollbar-width: none;
     }
-    .realisations-marquee::-webkit-scrollbar { display: none; }
-    .realisations-marquee::before,
-    .realisations-marquee::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 120px;
-      z-index: 2;
-      pointer-events: none;
-    }
-    .realisations-marquee::before {
-      left: 0;
-      background: linear-gradient(to right, var(--ivory), transparent);
-    }
-    .realisations-marquee::after {
-      right: 0;
-      background: linear-gradient(to left, var(--ivory), transparent);
+    .realisations-marquee::-webkit-scrollbar {
+      display: none;
     }
     .realisations-track {
       display: flex;
       gap: 18px;
       width: max-content;
+      padding: 4px 0 12px;
     }
     .realisation-card {
       flex: 0 0 auto;
-      width: clamp(240px, 26vw, 420px);
+      width: clamp(240px, 26vw, 390px);
       height: 330px;
       border-radius: 22px;
       overflow: hidden;
@@ -386,15 +375,10 @@
       transform: scale(1.04);
     }
     .realisation-card.tall {
-      width: clamp(220px, 22vw, 330px);
+      width: clamp(220px, 22vw, 310px);
     }
     .realisation-card.wide {
-      width: clamp(320px, 34vw, 520px);
-    }
-
-
-    .realisations-wrapper {
-      position: relative;
+      width: clamp(320px, 34vw, 500px);
     }
     .real-nav {
       position: absolute;
@@ -402,26 +386,32 @@
       transform: translateY(-50%);
       width: 50px;
       height: 50px;
-      border: 1px solid rgba(255,255,255,0.22);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 50%;
-      background: rgba(26,18,8,0.82);
+      background: rgba(26,18,8,0.88);
       color: #fff;
       cursor: pointer;
-      z-index: 12;
+      z-index: 20;
       font-size: 30px;
       line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       backdrop-filter: blur(8px);
-      transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
     .real-nav:hover {
-      background: rgba(201,168,76,0.88);
+      background: rgba(201,168,76,0.9);
       transform: translateY(-50%) scale(1.05);
     }
-    .real-prev { left: 18px; }
-    .real-next { right: 18px; }
+    .real-prev {
+      left: 0;
+    }
+    .real-next {
+      right: 0;
+    }
+
+
 
     /* ═══ CTA FINAL ═══ */
     .cta-section {
@@ -558,27 +548,7 @@
       .carte-hero-w { height: 260px; }
       .spe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
       .carte-hero-tx h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
-
-
-      .realisations-section { padding: 3.5rem 0; }
-      .realisation-card { width: 260px; height: 260px; border-radius: 18px; }
-      .realisation-card.wide { width: 320px; }
-      .realisation-card.tall { width: 220px; }
-      .realisations-track { gap: 12px; }
-      .realisations-marquee::-webkit-scrollbar { display: none; }
-    .realisations-marquee::before,
-      .realisations-marquee::after { width: 48px; }
-
-
-      .real-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 25px;
-      }
-      .real-prev { left: 8px; }
-      .real-next { right: 8px; }
-
-      /* Menu détail */
+/* Menu détail */
       .menu-grid-4 { grid-template-columns: 1fr; gap: 1.5rem; }
 
       /* Témoignages - cacher le 3ème sur mobile */
@@ -958,15 +928,16 @@
     <button class="real-nav real-prev" type="button" aria-label="Voir les photos précédentes">‹</button>
 
     <div class="realisations-marquee" aria-label="Galerie de réalisations Traiteur Samira">
-    <div class="realisations-track">
-      <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="Réception marocaine avec table dressée" loading="lazy"></div>
-      <div class="realisation-card"><img src="images/galerie_02.jpg" alt="Buffet marocain généreux" loading="lazy"></div>
-      <div class="realisation-card tall"><img src="images/galerie_03.jpg" alt="Prestation traiteur Samira" loading="lazy"></div>
-      <div class="realisation-card wide"><img src="images/galerie_04.jpg" alt="Plat marocain préparé pour événement" loading="lazy"></div>
-      <div class="realisation-card"><img src="images/galerie_05.jpg" alt="Épices marocaines traditionnelles" loading="lazy"></div>
-      <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="Buffet événementiel marocain" loading="lazy"></div>
-      <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="Pastilla et plats marocains" loading="lazy"></div>
-      <div class="realisation-card"><img src="images/galerie_08.jpg" alt="Tajine marocain traditionnel" loading="lazy"></div>
+      <div class="realisations-track">
+        <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="Réception marocaine avec table dressée" loading="lazy"></div>
+        <div class="realisation-card"><img src="images/galerie_02.jpg" alt="Buffet marocain généreux" loading="lazy"></div>
+        <div class="realisation-card tall"><img src="images/galerie_03.jpg" alt="Prestation traiteur Samira" loading="lazy"></div>
+        <div class="realisation-card wide"><img src="images/galerie_04.jpg" alt="Plat marocain préparé pour événement" loading="lazy"></div>
+        <div class="realisation-card"><img src="images/galerie_05.jpg" alt="Épices marocaines traditionnelles" loading="lazy"></div>
+        <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="Buffet événementiel marocain" loading="lazy"></div>
+        <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="Pastilla et plats marocains" loading="lazy"></div>
+        <div class="realisation-card"><img src="images/galerie_08.jpg" alt="Tajine marocain traditionnel" loading="lazy"></div>
+      </div>
     </div>
 
     <button class="real-nav real-next" type="button" aria-label="Voir les photos suivantes">›</button>
@@ -1118,24 +1089,27 @@ function toggleOccasions() {
   
 </script>
 
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const track = document.querySelector('.realisations-marquee');
+    const carousel = document.querySelector('.realisations-marquee');
     const prev = document.querySelector('.real-prev');
     const next = document.querySelector('.real-next');
 
-    if (!track || !prev || !next) return;
+    if (!carousel || !prev || !next) return;
 
-    function scrollAmount() {
-      return Math.min(620, Math.max(320, window.innerWidth * 0.65));
+    function getScrollAmount() {
+      const firstCard = carousel.querySelector('.realisation-card');
+      if (!firstCard) return 420;
+      return firstCard.offsetWidth + 18;
     }
 
     next.addEventListener('click', function () {
-      track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     });
 
     prev.addEventListener('click', function () {
-      track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+      carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
     });
   });
 </script>
