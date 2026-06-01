@@ -337,8 +337,12 @@
     .realisations-marquee {
       position: relative;
       width: 100%;
-      overflow: hidden;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
     }
+    .realisations-marquee::-webkit-scrollbar { display: none; }
     .realisations-marquee::before,
     .realisations-marquee::after {
       content: '';
@@ -361,10 +365,6 @@
       display: flex;
       gap: 18px;
       width: max-content;
-      animation: realisations-scroll 45s linear infinite;
-    }
-    .realisations-marquee:hover .realisations-track {
-      animation-play-state: paused;
     }
     .realisation-card {
       flex: 0 0 auto;
@@ -391,10 +391,37 @@
     .realisation-card.wide {
       width: clamp(320px, 34vw, 520px);
     }
-    @keyframes realisations-scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
+
+
+    .realisations-wrapper {
+      position: relative;
     }
+    .real-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 50%;
+      background: rgba(26,18,8,0.82);
+      color: #fff;
+      cursor: pointer;
+      z-index: 12;
+      font-size: 30px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    }
+    .real-nav:hover {
+      background: rgba(201,168,76,0.88);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .real-prev { left: 18px; }
+    .real-next { right: 18px; }
 
     /* ═══ CTA FINAL ═══ */
     .cta-section {
@@ -537,9 +564,19 @@
       .realisation-card { width: 260px; height: 260px; border-radius: 18px; }
       .realisation-card.wide { width: 320px; }
       .realisation-card.tall { width: 220px; }
-      .realisations-track { gap: 12px; animation-duration: 35s; }
-      .realisations-marquee::before,
+      .realisations-track { gap: 12px; }
+      .realisations-marquee::-webkit-scrollbar { display: none; }
+    .realisations-marquee::before,
       .realisations-marquee::after { width: 48px; }
+
+
+      .real-nav {
+        width: 40px;
+        height: 40px;
+        font-size: 25px;
+      }
+      .real-prev { left: 8px; }
+      .real-next { right: 8px; }
 
       /* Menu détail */
       .menu-grid-4 { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -917,7 +954,10 @@
     <h2>Des moments <em>inoubliables</em></h2>
   </div>
 
-  <div class="realisations-marquee fade-in" aria-label="Galerie de réalisations Traiteur Samira">
+  <div class="realisations-wrapper fade-in">
+    <button class="real-nav real-prev" type="button" aria-label="Voir les photos précédentes">‹</button>
+
+    <div class="realisations-marquee" aria-label="Galerie de réalisations Traiteur Samira">
     <div class="realisations-track">
       <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="Réception marocaine avec table dressée" loading="lazy"></div>
       <div class="realisation-card"><img src="images/galerie_02.jpg" alt="Buffet marocain généreux" loading="lazy"></div>
@@ -927,39 +967,9 @@
       <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="Buffet événementiel marocain" loading="lazy"></div>
       <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="Pastilla et plats marocains" loading="lazy"></div>
       <div class="realisation-card"><img src="images/galerie_08.jpg" alt="Tajine marocain traditionnel" loading="lazy"></div>
+    </div>
 
-      <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card"><img src="images/galerie_02.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card tall"><img src="images/galerie_03.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card wide"><img src="images/galerie_04.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card"><img src="images/galerie_05.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-      <div class="realisation-card"><img src="images/galerie_08.jpg" alt="" loading="lazy" aria-hidden="true"></div>
-    </div>
-  </div>
-</section>
-
-<section class="gallery-section section" id="galerie">
-  <div class="container">
-    <div class="gallery-top fade-in">
-      <span class="eyebrow">Nos réalisations</span>
-      <h2>Des moments <em>inoubliables</em></h2>
-    </div>
-    <div class="gallery-grid fade-in">
-      <div class="gallery-box"><img src="images/galerie_01.jpg" alt="Buffet marocain traiteur Samira" loading="lazy" /></div>
-      <div class="gallery-box"><img src="images/galerie_02.jpg" alt="Plats marocains traiteur Paris" loading="lazy" /></div>
-      <div class="gallery-box"><img src="images/galerie_03.jpg" alt="Événement traiteur marocain IDF" loading="lazy" /></div>
-      <div class="gallery-box"><img src="images/galerie_04.jpg" alt="Mariage traiteur Samira" loading="lazy" /></div>
-      <div class="gallery-box"><img src="images/galerie_05.jpg" alt="Couscous tajine buffet Paris" loading="lazy" /></div>
-      <div class="gallery-box"><img src="images/galerie_06.jpeg" alt="Pâtisseries orientales traiteur" loading="lazy" /></div>
-    </div>
-    <div class="gallery-social fade-in">
-      <p>Suivez nos créations sur les réseaux</p>
-      <div class="social-links">
-        <a href="https://www.tiktok.com/@traiteur.samira" target="_blank" class="social-btn">🎵 Voir nos vidéos TikTok</a>
-      </div>
-    </div>
+    <button class="real-nav real-next" type="button" aria-label="Voir les photos suivantes">›</button>
   </div>
 </section>
 
@@ -1107,5 +1117,28 @@ function toggleOccasions() {
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   
 </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const track = document.querySelector('.realisations-marquee');
+    const prev = document.querySelector('.real-prev');
+    const next = document.querySelector('.real-next');
+
+    if (!track || !prev || !next) return;
+
+    function scrollAmount() {
+      return Math.min(620, Math.max(320, window.innerWidth * 0.65));
+    }
+
+    next.addEventListener('click', function () {
+      track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+
+    prev.addEventListener('click', function () {
+      track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+  });
+</script>
+
 </body>
 </html>
