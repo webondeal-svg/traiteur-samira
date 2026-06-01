@@ -307,6 +307,95 @@
     .social-btn { display: inline-block; padding: 0.8rem 2rem; border: 1px solid var(--gold); color: var(--brown); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; transition: all 0.2s; }
     .social-btn:hover { background: var(--gold); color: white; }
 
+
+    /* ═══ RÉALISATIONS — CARROUSEL ═══ */
+    .realisations-section {
+      background: var(--ivory);
+      padding: 5rem 0;
+      overflow: hidden;
+    }
+    .realisations-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+    .realisations-header .eyebrow {
+      color: var(--gold-dark);
+    }
+    .realisations-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      color: var(--dark);
+      line-height: 1.1;
+    }
+    .realisations-header h2 em {
+      color: var(--gold-dark);
+      font-style: italic;
+    }
+    .realisations-marquee {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .realisations-marquee::before,
+    .realisations-marquee::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .realisations-marquee::before {
+      left: 0;
+      background: linear-gradient(to right, var(--ivory), transparent);
+    }
+    .realisations-marquee::after {
+      right: 0;
+      background: linear-gradient(to left, var(--ivory), transparent);
+    }
+    .realisations-track {
+      display: flex;
+      gap: 18px;
+      width: max-content;
+      animation: realisations-scroll 45s linear infinite;
+    }
+    .realisations-marquee:hover .realisations-track {
+      animation-play-state: paused;
+    }
+    .realisation-card {
+      flex: 0 0 auto;
+      width: clamp(240px, 26vw, 420px);
+      height: 330px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 18px 36px rgba(26,18,8,0.14);
+      background: var(--dark);
+    }
+    .realisation-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.45s ease;
+    }
+    .realisation-card:hover img {
+      transform: scale(1.04);
+    }
+    .realisation-card.tall {
+      width: clamp(220px, 22vw, 330px);
+    }
+    .realisation-card.wide {
+      width: clamp(320px, 34vw, 520px);
+    }
+    @keyframes realisations-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     /* ═══ CTA FINAL ═══ */
     .cta-section {
       position: relative; overflow: hidden; min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;
@@ -442,6 +531,15 @@
       .carte-hero-w { height: 260px; }
       .spe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
       .carte-hero-tx h2 { font-size: clamp(1.6rem, 5vw, 2.5rem); }
+
+
+      .realisations-section { padding: 3.5rem 0; }
+      .realisation-card { width: 260px; height: 260px; border-radius: 18px; }
+      .realisation-card.wide { width: 320px; }
+      .realisation-card.tall { width: 220px; }
+      .realisations-track { gap: 12px; animation-duration: 35s; }
+      .realisations-marquee::before,
+      .realisations-marquee::after { width: 48px; }
 
       /* Menu détail */
       .menu-grid-4 { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -811,6 +909,37 @@
 </section>
 
 <!-- ═══ GALERIE ═══ -->
+
+<!-- ═══ RÉALISATIONS — DÉFILEMENT ═══ -->
+<section class="realisations-section" id="realisations">
+  <div class="realisations-header fade-in">
+    <span class="eyebrow">Nos réalisations</span>
+    <h2>Des moments <em>inoubliables</em></h2>
+  </div>
+
+  <div class="realisations-marquee fade-in" aria-label="Galerie de réalisations Traiteur Samira">
+    <div class="realisations-track">
+      <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="Réception marocaine avec table dressée" loading="lazy"></div>
+      <div class="realisation-card"><img src="images/galerie_02.jpg" alt="Buffet marocain généreux" loading="lazy"></div>
+      <div class="realisation-card tall"><img src="images/galerie_03.jpg" alt="Prestation traiteur Samira" loading="lazy"></div>
+      <div class="realisation-card wide"><img src="images/galerie_04.jpg" alt="Plat marocain préparé pour événement" loading="lazy"></div>
+      <div class="realisation-card"><img src="images/galerie_05.jpg" alt="Épices marocaines traditionnelles" loading="lazy"></div>
+      <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="Buffet événementiel marocain" loading="lazy"></div>
+      <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="Pastilla et plats marocains" loading="lazy"></div>
+      <div class="realisation-card"><img src="images/galerie_08.jpg" alt="Tajine marocain traditionnel" loading="lazy"></div>
+
+      <div class="realisation-card wide"><img src="images/galerie_01.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card"><img src="images/galerie_02.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card tall"><img src="images/galerie_03.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card wide"><img src="images/galerie_04.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card"><img src="images/galerie_05.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card tall"><img src="images/galerie_06.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card wide"><img src="images/galerie_07.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+      <div class="realisation-card"><img src="images/galerie_08.jpg" alt="" loading="lazy" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
 <section class="gallery-section section" id="galerie">
   <div class="container">
     <div class="gallery-top fade-in">
