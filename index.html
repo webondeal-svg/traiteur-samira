@@ -50,7 +50,7 @@
         { "@type": "Offer", "name": "Formule Événement", "price": "0", "priceCurrency": "EUR", "description": "Sur devis" }
       ]
     },
-    "sameAs": ["https://www.tiktok.com/@traiteur.samira", "https://www.mon-traiteur-marocain.com"]
+    "sameAs": ["https://www.tiktok.com/@traiteur.samira", "https://www.instagram.com/samira.traiteur/", "https://www.mon-traiteur-marocain.com"]
   }
   </script>
   <script type="application/ld+json">
@@ -412,6 +412,14 @@
     }
 
 
+
+
+    .realisations-marquee {
+      cursor: grab;
+    }
+    .realisations-marquee:active {
+      cursor: grabbing;
+    }
 
     /* ═══ CTA FINAL ═══ */
     .cta-section {
@@ -942,6 +950,21 @@
 
     <button class="real-nav real-next" type="button" aria-label="Voir les photos suivantes">›</button>
   </div>
+
+  <div class="gallery-social fade-in" style="margin-top: 2rem;">
+    <p>Découvrez encore plus de réalisations sur nos réseaux</p>
+    <div class="social-links">
+      <a href="https://www.tiktok.com/@traiteur.samira"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="social-btn">🎵 Voir nos vidéos TikTok</a>
+
+      <a href="https://www.instagram.com/samira.traiteur/"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="social-btn">📸 Voir notre Instagram</a>
+    </div>
+  </div>
 </section>
 
 <!-- ═══ CTA CONTACT ═══ -->
@@ -1090,6 +1113,7 @@ function toggleOccasions() {
 </script>
 
 
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.realisations-marquee');
@@ -1098,20 +1122,95 @@ function toggleOccasions() {
 
     if (!carousel || !prev || !next) return;
 
+    let autoTimer = null;
+
     function getScrollAmount() {
       const firstCard = carousel.querySelector('.realisation-card');
       if (!firstCard) return 420;
       return firstCard.offsetWidth + 18;
     }
 
+    function scrollNext() {
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      const amount = getScrollAmount();
+
+      if (carousel.scrollLeft >= maxScroll - 10) {
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: amount, behavior: 'smooth' });
+      }
+    }
+
+    function scrollPrev() {
+      const amount = getScrollAmount();
+
+      if (carousel.scrollLeft <= 10) {
+        carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: -amount, behavior: 'smooth' });
+      }
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(scrollNext, 3500);
+    }
+
+    function stopAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+    }
+
     next.addEventListener('click', function () {
-      carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+      scrollNext();
+      startAuto();
     });
 
     prev.addEventListener('click', function () {
-      carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+      scrollPrev();
+      startAuto();
     });
+
+    carousel.addEventListener('mouseenter', stopAuto);
+    carousel.addEventListener('mouseleave', startAuto);
+    carousel.addEventListener('touchstart', stopAuto, { passive: true });
+    carousel.addEventListener('touchend', startAuto, { passive: true });
+
+    startAuto();
   });
+</script>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const carousel = document.querySelector(".realisations-marquee");
+  const next = document.querySelector(".real-next");
+  const prev = document.querySelector(".real-prev");
+
+  if (!carousel || !next || !prev) return;
+
+  const amount = 420;
+
+  function autoScroll() {
+    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+    if (carousel.scrollLeft >= maxScroll - 5) {
+      carousel.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      carousel.scrollBy({ left: amount, behavior: "smooth" });
+    }
+  }
+
+  setInterval(autoScroll, 3000);
+
+  next.addEventListener("click", function () {
+    autoScroll();
+  });
+
+  prev.addEventListener("click", function () {
+    carousel.scrollBy({ left: -amount, behavior: "smooth" });
+  });
+});
 </script>
 
 </body>
